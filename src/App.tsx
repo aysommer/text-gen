@@ -1,25 +1,25 @@
 import {
    AppBar,
-   Paper,
    Toolbar,
    Typography,
    Box,
    Grid
 } from '@mui/material';
 import { InputController } from './components/input-contoller';
+import { TemplatesList } from './components/templates-list';
+import { useState } from 'react';
+import { DEFAULT_TYPE } from './constants';
+import type { TemplateType } from './types';
 
 import './App.css';
 
-export enum Templates {
-   Default = 'default',
-   Reverse = 'reverse'
-}
-
 const App = () => {
+   const [template, setTemplate] = useState<TemplateType>(DEFAULT_TYPE);
+
    return (
       <Box sx={{ display: 'flex' }}>
          <Box component='header'>
-            <AppBar component='nav' sx={{ borderRadius: 4 }}>
+            <AppBar component='nav'>
                <Toolbar>
                   <Typography
                      variant='h6'
@@ -33,20 +33,18 @@ const App = () => {
          <Box component='main' sx={{ p: 2, width: '100%' }}>
             <Toolbar />
             <Grid
-               container rowSpacing={1}
+               container
+               rowSpacing={2}
                columnSpacing={2}
                alignItems="stretch"
                direction="row">
                <Grid item xs={6}>
-                  <InputController />
+                  <InputController templateName={template} />
                </Grid>
                <Grid item xs={6}>
-                  <Paper elevation={3}>
-                     Templates list
-                  </Paper>
+                  <TemplatesList setTemplate={setTemplate} />
                </Grid>
             </Grid>
-
          </Box>
       </Box>
    );
