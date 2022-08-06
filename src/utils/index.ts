@@ -1,5 +1,9 @@
 import reverse from "./reverse";
+import upperCase from "./upperCase";
+import lowerCase from "./lowerCase";
 
 export {
-   reverse
+   reverse,
+   upperCase,
+   lowerCase
 };

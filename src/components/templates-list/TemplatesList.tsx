@@ -6,24 +6,17 @@ import { TEMPLATES } from "../../constants";
 import { TemplateType } from "../../types";
 import TemplateItem from "./TemplateItem";
 
-export type SetTemplate = React.Dispatch<React.SetStateAction<TemplateType>>;
-
-type TemplatesListProps = {
-   setTemplate: SetTemplate;
-}
-
 const TEMPLATES_TYPES = Object.keys(TEMPLATES) as TemplateType[];
 
-const TemplatesList: React.FC<TemplatesListProps> = ({ setTemplate }) => {
+const TemplatesList = () => {
    return (
       <Paper elevation={3} sx={{ padding: 2 }}>
-         <Stack direction='row'>
+         <Stack spacing={2}>
             {TEMPLATES_TYPES.map((type, i) => (
                <TemplateItem
                   key={i}
-                  type={type}
+                  templateType={type}
                   example={TEMPLATES[type]}
-                  setTemplate={setTemplate}
                />
             ))}
          </Stack>

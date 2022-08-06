@@ -7,15 +7,10 @@ import {
 } from '@mui/material';
 import { InputController } from './components/input-contoller';
 import { TemplatesList } from './components/templates-list';
-import { useState } from 'react';
-import { DEFAULT_TYPE } from './constants';
-import type { TemplateType } from './types';
 
 import './App.css';
 
 const App = () => {
-   const [template, setTemplate] = useState<TemplateType>(DEFAULT_TYPE);
-
    return (
       <Box sx={{ display: 'flex' }}>
          <Box component='header'>
@@ -39,10 +34,10 @@ const App = () => {
                alignItems="stretch"
                direction="row">
                <Grid item xs={6}>
-                  <InputController templateName={template} />
+                  <InputController />
                </Grid>
                <Grid item xs={6}>
-                  <TemplatesList setTemplate={setTemplate} />
+                  <TemplatesList />
                </Grid>
             </Grid>
          </Box>

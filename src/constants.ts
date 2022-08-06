@@ -3,5 +3,7 @@ export const DEFAULT_TYPE = 'Default';
 
 export const TEMPLATES = {
    [DEFAULT_TYPE]: 'Lorem Ipsum',
-   Reverse: 'muspI meroL'
+   Reverse: 'muspI meroL',
+   'Upper case': 'LOREM IPSUM',
+   'Lower case': 'lorem ipsum'
 };

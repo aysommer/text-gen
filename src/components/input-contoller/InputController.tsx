@@ -1,51 +1,46 @@
 import {
    Paper,
-   TextField
+   Stack,
+   TextField,
+   Typography
 } from '@mui/material'
-import { useState, ChangeEvent } from 'react'
+import { observer } from 'mobx-react-lite';
+import { ChangeEvent } from 'react'
 import { DEFAULT_TEXT } from '../../constants';
-import { TemplateType } from '../../types';
-import { reverse } from '../../utils'
+import { appStore } from '../../store';
 
-type InputControllerProps = {
-   templateName: TemplateType;
-}
-
-const InputController: React.FC<InputControllerProps> = ({ templateName }) => {
-   const [value, setValue] = useState<string>(DEFAULT_TEXT);
-   const [formattedValue, setFormattedValue] = useState<string>(DEFAULT_TEXT);
-
-   const handleChangeValue = ({ target }: ChangeEvent<HTMLTextAreaElement>) => {
-      setValue(target.value)
-
-      const format = {
-         Default: () => setFormattedValue(target.value),
-         Reverse: () => setFormattedValue(reverse(target.value))
-      }[templateName];
-
-      format();
+const InputController = observer(() => {
+   const handleChangeValue = ({ target: { value } }: ChangeEvent<HTMLTextAreaElement>) => {
+      appStore.value = value;
+      appStore.format(value, appStore.templateType);
    };
 
    return (
       <Paper sx={{ display: 'flex', padding: 2 }}>
-         <TextField
-            sx={{ width: '100%', marginRight: 2 }}
-            id="outlined-multiline-static"
-            multiline
-            onChange={handleChangeValue}
-            placeholder={DEFAULT_TEXT}
-            value={value}
-         />
-         <TextField
-            sx={{ width: '100%' }}
-            id="outlined-multiline-static"
-            multiline
-            onChange={handleChangeValue}
-            placeholder={DEFAULT_TEXT}
-            value={formattedValue}
-         />
+         <Stack width='50%'>
+            <Typography>Input</Typography>
+            <TextField
+               sx={{ width: '100%', marginRight: 2 }}
+               id="outlined-multiline-static"
+               multiline
+               onChange={handleChangeValue}
+               placeholder={DEFAULT_TEXT}
+               value={appStore.value}
+            />
+         </Stack>
+         <Stack width='50%' marginLeft={2}>
+            <Typography>Output</Typography>
+            <TextField
+               sx={{ width: '100%' }}
+               id="outlined-multiline-static"
+               multiline
+               aria-readonly={true}
+               placeholder={DEFAULT_TEXT}
+               value={appStore.formattedValue}
+            />
+         </Stack>
       </Paper>
    )
-}
+});
 
 export default InputController;

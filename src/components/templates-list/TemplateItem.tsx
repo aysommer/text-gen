@@ -5,32 +5,31 @@ import {
    CardContent,
    Typography
 } from "@mui/material";
+import { observer } from "mobx-react-lite";
 import React from "react";
+import { appStore } from "../../store";
 import type { TemplateExample, TemplateType } from "../../types";
-import { SetTemplate } from "./TemplatesList";
 
 type TemplateItemProps = {
-   type: TemplateType;
+   templateType: TemplateType;
    example: TemplateExample;
-   setTemplate: SetTemplate;
 }
 
-const TemplateItem: React.FC<TemplateItemProps> = ({
-   type,
-   example,
-   setTemplate
+const TemplateItem: React.FC<TemplateItemProps> = observer(({
+   templateType,
+   example
 }) => {
    const handleClick = () => {
-      setTemplate(type);
+      appStore.setTemplateType(templateType);
    }
 
    return (
-      <Box sx={{ minWidth: 250, minHeight: 250 }}>
+      <Box>
          <Card variant="outlined">
             <CardActionArea onClick={handleClick}>
                <CardContent>
                   <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                     {type}
+                     {templateType}
                   </Typography>
                   <Typography variant="h5" component="div">
                      {example}
@@ -40,6 +39,6 @@ const TemplateItem: React.FC<TemplateItemProps> = ({
          </Card>
       </Box>
    );
-}
+});
 
 export default React.memo(TemplateItem);
