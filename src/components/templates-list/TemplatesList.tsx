@@ -1,6 +1,8 @@
 import {
    Paper,
-   List
+   List,
+   Typography,
+   Box
 } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { TEMPLATES } from "../../constants";
@@ -13,6 +15,9 @@ const TEMPLATES_TYPES = Object.keys(TEMPLATES) as TemplateType[];
 const TemplatesList = observer(() => {
    return (
       <Paper elevation={3}>
+         <Box paddingTop={2} paddingLeft={2}>
+            <Typography variant='h5' fontWeight={700}>Templates</Typography>
+         </Box>
          <List>
             {TEMPLATES_TYPES.map((templateType) => (
                <TemplateItem

@@ -29,6 +29,10 @@ class AppStore {
       const formatFunction = FormatFunctionCfg[templateType];
       this.formattedValue = (formatFunction) ? formatFunction(value) : value;
    }
+
+   public reset = (): void => {
+      this.value = this.formattedValue = '';
+   }
 }
 
 const appStore = new AppStore();
