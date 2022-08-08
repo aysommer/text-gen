@@ -1,44 +1,43 @@
 import {
-   Box,
-   Card,
-   CardActionArea,
-   CardContent,
+   Stack,
+   ListItemButton,
    Typography
 } from "@mui/material";
-import { observer } from "mobx-react-lite";
-import React from "react";
-import { appStore } from "../../store";
+import React, { useCallback } from "react";
+import type { appStore } from "../../store";
 import type { TemplateExample, TemplateType } from "../../types";
 
 type TemplateItemProps = {
+   isSelected: boolean;
    templateType: TemplateType;
+   handleSetTemplate: typeof appStore.setTemplateType;
    example: TemplateExample;
 }
 
-const TemplateItem: React.FC<TemplateItemProps> = observer(({
+const TemplateItem: React.FC<TemplateItemProps> = ({
+   isSelected,
+   handleSetTemplate,
    templateType,
    example
 }) => {
-   const handleClick = () => {
-      appStore.setTemplateType(templateType);
-   }
+   const handleOnClick = useCallback(() => {
+      handleSetTemplate(templateType);
+   }, [handleSetTemplate, templateType]);
 
    return (
-      <Box>
-         <Card variant="outlined">
-            <CardActionArea onClick={handleClick}>
-               <CardContent>
-                  <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                     {templateType}
-                  </Typography>
-                  <Typography variant="h5" component="div">
-                     {example}
-                  </Typography>
-               </CardContent>
-            </CardActionArea>
-         </Card>
-      </Box>
+      <ListItemButton selected={isSelected} onClick={handleOnClick}>
+         <Stack>
+            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+               {templateType}
+            </Typography>
+            <Typography variant="h5" component="div">
+               {example}
+            </Typography>
+         </Stack>
+      </ListItemButton>
    );
-});
+};
 
-export default React.memo(TemplateItem);
+export default React.memo(TemplateItem, (prevProps, nextProps) => {
+   return prevProps.isSelected === nextProps.isSelected;
+});

@@ -3,6 +3,13 @@ import { DEFAULT_TYPE } from "../constants";
 import { TemplateType } from "../types";
 import { lowerCase, reverse, upperCase } from "../utils";
 
+const FormatFunctionCfg = {
+   'Default': null,
+   'Reverse': reverse,
+   'Upper case': upperCase,
+   'Lower case': lowerCase
+};
+
 class AppStore {
    public value: string = '';
    public formattedValue: string = '';
@@ -19,12 +26,8 @@ class AppStore {
    }
 
    public format = (value: string, templateType: TemplateType): void => {
-      switch (templateType) {
-         case 'Default': this.formattedValue = value; break;
-         case 'Reverse': this.formattedValue = reverse(value); break;
-         case 'Upper case': this.formattedValue = upperCase(value); break;
-         case 'Lower case': this.formattedValue = lowerCase(value); break;
-      }
+      const formatFunction = FormatFunctionCfg[templateType];
+      this.formattedValue = (formatFunction) ? formatFunction(value) : value;
    }
 }
 

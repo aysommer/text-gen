@@ -1,27 +1,31 @@
 import {
    Paper,
-   Stack
+   List
 } from "@mui/material";
+import { observer } from "mobx-react-lite";
 import { TEMPLATES } from "../../constants";
+import { appStore } from "../../store";
 import { TemplateType } from "../../types";
 import TemplateItem from "./TemplateItem";
 
 const TEMPLATES_TYPES = Object.keys(TEMPLATES) as TemplateType[];
 
-const TemplatesList = () => {
+const TemplatesList = observer(() => {
    return (
-      <Paper elevation={3} sx={{ padding: 2 }}>
-         <Stack spacing={2}>
-            {TEMPLATES_TYPES.map((type, i) => (
+      <Paper elevation={3}>
+         <List>
+            {TEMPLATES_TYPES.map((templateType) => (
                <TemplateItem
-                  key={i}
-                  templateType={type}
-                  example={TEMPLATES[type]}
+                  key={templateType}
+                  isSelected={appStore.templateType === templateType}
+                  handleSetTemplate={appStore.setTemplateType}
+                  templateType={templateType}
+                  example={TEMPLATES[templateType]}
                />
             ))}
-         </Stack>
+         </List>
       </Paper>
    );
-}
+});
 
 export default TemplatesList;

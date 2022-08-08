@@ -2,45 +2,62 @@ import {
    Paper,
    Stack,
    TextField,
-   Typography
+   Typography,
+   Box
 } from '@mui/material'
 import { observer } from 'mobx-react-lite';
 import { ChangeEvent } from 'react'
 import { DEFAULT_TEXT } from '../../constants';
 import { appStore } from '../../store';
 
-const InputController = observer(() => {
+type InputProps = {
+   label: string;
+   fieldName: keyof Pick<typeof appStore, 'value' | 'formattedValue'>;
+   readOnly?: boolean;
+};
+
+const Input: React.FC<InputProps> = observer(({
+   label,
+   fieldName,
+   readOnly = false
+}) => {
    const handleChangeValue = ({ target: { value } }: ChangeEvent<HTMLTextAreaElement>) => {
-      appStore.value = value;
+      appStore[fieldName] = value;
       appStore.format(value, appStore.templateType);
    };
 
    return (
+      <Stack width='50%'>
+         <Typography>{label}</Typography>
+         <TextField
+            sx={{ width: '100%'}}
+            id="outlined-multiline-static"
+            multiline
+            aria-readonly={readOnly}
+            onChange={handleChangeValue}
+            placeholder={DEFAULT_TEXT}
+            value={appStore[fieldName]}
+         />
+      </Stack>
+   )
+});
+
+const InputController = () => {
+   return (
       <Paper sx={{ display: 'flex', padding: 2 }}>
-         <Stack width='50%'>
-            <Typography>Input</Typography>
-            <TextField
-               sx={{ width: '100%', marginRight: 2 }}
-               id="outlined-multiline-static"
-               multiline
-               onChange={handleChangeValue}
-               placeholder={DEFAULT_TEXT}
-               value={appStore.value}
+         <Stack direction='row' spacing={2} width='100%'>
+            <Input
+               label='Input'
+               fieldName='value'
             />
-         </Stack>
-         <Stack width='50%' marginLeft={2}>
-            <Typography>Output</Typography>
-            <TextField
-               sx={{ width: '100%' }}
-               id="outlined-multiline-static"
-               multiline
-               aria-readonly={true}
-               placeholder={DEFAULT_TEXT}
-               value={appStore.formattedValue}
+            <Input
+               label='Output'
+               fieldName='formattedValue'
+               readOnly={true}
             />
          </Stack>
       </Paper>
    )
-});
+};
 
 export default InputController;
