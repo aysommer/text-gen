@@ -5,7 +5,8 @@ import {
    lowerCase,
    reverse,
    upperCase,
-   pianoCase
+   pianoCase,
+   fullwidth
 } from "../utils";
 
 const FormatFunctionCfg = {
@@ -14,7 +15,8 @@ const FormatFunctionCfg = {
    'Upper case': upperCase,
    'Lower case': lowerCase,
    'Piano case 1': (value: string) => pianoCase(value, true),
-   'Piano case 2': (value: string) => pianoCase(value, false)
+   'Piano case 2': (value: string) => pianoCase(value, false),
+   'Fullwidth': fullwidth
 };
 
 class AppStore {

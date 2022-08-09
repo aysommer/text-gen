@@ -11,7 +11,11 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { observer } from 'mobx-react-lite';
-import { ChangeEvent, useState, useMemo, useCallback } from 'react'
+import {
+   ChangeEvent,
+   useState,
+   useMemo
+} from 'react';
 import { DEFAULT_TEXT } from '../../constants';
 import { appStore } from '../../store';
 
@@ -63,7 +67,6 @@ const Input: React.FC<InputProps> = observer(({
          <Typography variant='h5' fontWeight={700}>{label}</Typography>
          <TextField
             sx={{ width: '100%' }}
-            id="outlined-multiline-static"
             multiline
             aria-readonly={readOnly}
             onChange={handleChangeValue}

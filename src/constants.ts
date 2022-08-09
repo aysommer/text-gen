@@ -7,5 +7,6 @@ export const TEMPLATES = {
    'Upper case': 'LOREM IPSUM',
    'Lower case': 'lorem ipsum',
    'Piano case 1': 'lOrEm iPsUm',
-   'Piano case 2': 'LoReM IpSuM'
+   'Piano case 2': 'LoReM IpSuM',
+   'Fullwidth': 'Ｌｏｒｅｍ  ｉｐｓｕｍ'
 };
