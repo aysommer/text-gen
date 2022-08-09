@@ -14,7 +14,7 @@ const TEMPLATES_TYPES = Object.keys(TEMPLATES) as TemplateType[];
 
 const TemplatesList = observer(() => {
    return (
-      <Paper elevation={3}>
+      <Paper>
          <Box paddingTop={2} paddingLeft={2}>
             <Typography variant='h5' fontWeight={700}>Templates</Typography>
          </Box>

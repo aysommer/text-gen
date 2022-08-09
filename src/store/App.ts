@@ -1,13 +1,20 @@
 import { makeAutoObservable } from "mobx";
 import { DEFAULT_TYPE } from "../constants";
 import { TemplateType } from "../types";
-import { lowerCase, reverse, upperCase } from "../utils";
+import {
+   lowerCase,
+   reverse,
+   upperCase,
+   pianoCase
+} from "../utils";
 
 const FormatFunctionCfg = {
    'Default': null,
    'Reverse': reverse,
    'Upper case': upperCase,
-   'Lower case': lowerCase
+   'Lower case': lowerCase,
+   'Piano case 1': (value: string) => pianoCase(value, true),
+   'Piano case 2': (value: string) => pianoCase(value, false)
 };
 
 class AppStore {

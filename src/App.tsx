@@ -5,8 +5,8 @@ import {
    Box,
    Grid
 } from '@mui/material';
-import { InputController } from './components/input-contoller';
-import { TemplatesList } from './components/templates-list';
+import { InputController } from './components/inputContoller';
+import { TemplatesList } from './components/templatesList';
 
 import './App.css';
 

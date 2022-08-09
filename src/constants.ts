@@ -5,5 +5,7 @@ export const TEMPLATES = {
    [DEFAULT_TYPE]: 'Lorem Ipsum',
    Reverse: 'muspI meroL',
    'Upper case': 'LOREM IPSUM',
-   'Lower case': 'lorem ipsum'
+   'Lower case': 'lorem ipsum',
+   'Piano case 1': 'lOrEm iPsUm',
+   'Piano case 2': 'LoReM IpSuM'
 };

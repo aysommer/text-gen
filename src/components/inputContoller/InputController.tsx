@@ -11,7 +11,7 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { observer } from 'mobx-react-lite';
-import { ChangeEvent, useState, useMemo } from 'react'
+import { ChangeEvent, useState, useMemo, useCallback } from 'react'
 import { DEFAULT_TEXT } from '../../constants';
 import { appStore } from '../../store';
 
@@ -70,6 +70,7 @@ const Input: React.FC<InputProps> = observer(({
             placeholder={DEFAULT_TEXT}
             value={appStore[fieldName]}
             InputProps={(appStore[fieldName]) ? {
+               readOnly,
                endAdornment:
                   <InputAdornment position="start" >
                      <IconButton
@@ -80,7 +81,7 @@ const Input: React.FC<InputProps> = observer(({
                         {icon}
                      </IconButton>
                   </InputAdornment>
-            } : {}}
+            } : { readOnly }}
          />
          <Snackbar
             open={snackbarOpened}
