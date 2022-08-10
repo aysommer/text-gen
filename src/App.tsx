@@ -1,47 +1,28 @@
+import { useMemo } from 'react';
 import {
-   AppBar,
-   Toolbar,
-   Typography,
    Box,
-   Grid
+   useMediaQuery
 } from '@mui/material';
-import { InputController } from './components/inputContoller';
-import { TemplatesList } from './components/templatesList';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { Header, Main } from './components/layout';
 
 import './App.css';
 
 const App = () => {
+   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+   const theme = useMemo(() => createTheme({
+      palette: {
+         mode: prefersDarkMode ? 'dark' : 'light',
+      },
+   }), [prefersDarkMode]);
+
    return (
-      <Box sx={{ display: 'flex' }}>
-         <Box component='header'>
-            <AppBar component='nav'>
-               <Toolbar>
-                  <Typography
-                     variant='h6'
-                     noWrap
-                     component='div'>
-                     text-gen
-                  </Typography>
-               </Toolbar>
-            </AppBar>
+      <ThemeProvider theme={theme}>
+         <Box sx={{ display: 'flex' }} height='100%'>
+            <Header />
+            <Main />
          </Box>
-         <Box component='main' sx={{ p: 2, width: '100%' }}>
-            <Toolbar />
-            <Grid
-               container
-               rowSpacing={2}
-               columnSpacing={2}
-               alignItems="stretch"
-               direction="row">
-               <Grid item xs={6}>
-                  <InputController />
-               </Grid>
-               <Grid item xs={6}>
-                  <TemplatesList />
-               </Grid>
-            </Grid>
-         </Box>
-      </Box>
+      </ThemeProvider>
    );
 }
 
