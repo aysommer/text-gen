@@ -1,23 +1,6 @@
 import { makeAutoObservable } from "mobx";
-import { DEFAULT_TYPE } from "../constants";
+import { DEFAULT_TYPE, TEMPLATES_CFG } from "../constants";
 import { TemplateType } from "../types";
-import {
-   lowerCase,
-   reverse,
-   upperCase,
-   pianoCase,
-   fullwidth
-} from "../utils";
-
-const FormatFunctionCfg = {
-   'Default': null,
-   'Reverse': reverse,
-   'Upper case': upperCase,
-   'Lower case': lowerCase,
-   'Piano case 1': (value: string) => pianoCase(value, true),
-   'Piano case 2': (value: string) => pianoCase(value, false),
-   'Fullwidth': fullwidth
-};
 
 class AppStore {
    public value: string = '';
@@ -35,7 +18,7 @@ class AppStore {
    }
 
    public format = (value: string, templateType: TemplateType): void => {
-      const formatFunction = FormatFunctionCfg[templateType];
+      const { formatFunction } = TEMPLATES_CFG[templateType];
       this.formattedValue = (formatFunction) ? formatFunction(value) : value;
    }
 

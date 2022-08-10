@@ -5,12 +5,12 @@ import {
    Box
 } from "@mui/material";
 import { observer } from "mobx-react-lite";
-import { TEMPLATES } from "../../constants";
+import { TEMPLATES_CFG } from "../../constants";
 import { appStore } from "../../store";
 import { TemplateType } from "../../types";
 import TemplateItem from "./TemplateItem";
 
-const TEMPLATES_TYPES = Object.keys(TEMPLATES) as TemplateType[];
+const TEMPLATES = Object.keys(TEMPLATES_CFG) as TemplateType[];
 
 const TemplatesList = observer(() => {
    return (
@@ -19,13 +19,13 @@ const TemplatesList = observer(() => {
             <Typography variant='h5' fontWeight={700}>Templates</Typography>
          </Box>
          <List>
-            {TEMPLATES_TYPES.map((templateType) => (
+            {TEMPLATES.map((type) => (
                <TemplateItem
-                  key={templateType}
-                  isSelected={appStore.templateType === templateType}
+                  key={type}
+                  isSelected={appStore.templateType === type}
                   handleSetTemplate={appStore.setTemplateType}
-                  templateType={templateType}
-                  example={TEMPLATES[templateType]}
+                  type={type}
+                  example={TEMPLATES_CFG[type].example}
                />
             ))}
          </List>
