@@ -18,7 +18,11 @@ const App = () => {
 
    return (
       <ThemeProvider theme={theme}>
-         <Box sx={{ display: 'flex' }} height='100%'>
+         <Box sx={{
+            display: 'flex',
+            bgcolor: 'background.default',
+            height: '100%'
+         }}>
             <Header />
             <Main />
          </Box>

@@ -101,15 +101,15 @@ const Input: React.FC<InputProps> = observer(({
 const InputController = () => {
    return (
       <Paper sx={{ display: 'flex', padding: 2 }}>
-         <Stack direction='row' spacing={2} width='100%'>
-            <Stack width='50%' spacing={1}>
+         <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} width='100%'>
+            <Stack width={{ xs: '100%', md: '50%' }} spacing={1}>
                <Input
                   label='Input'
                   fieldName='value'
                   action={InputAction.Clear}
                />
             </Stack>
-            <Stack width='50%' spacing={1}>
+            <Stack width={{ xs: '100%', md: '50%' }} spacing={1}>
                <Input
                   label='Output'
                   fieldName='formattedValue'

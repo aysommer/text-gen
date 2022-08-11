@@ -10,7 +10,7 @@ const Header = () => {
       <Box component='header'>
          <AppBar component='nav'>
             <Toolbar>
-               <Typography variant='h6' noWrap component='div'>
+               <Typography variant='h5' noWrap component='div'>
                   text-gen
                </Typography>
             </Toolbar>

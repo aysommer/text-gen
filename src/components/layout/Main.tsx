@@ -9,12 +9,17 @@ import { TemplatesList } from "../templatesList";
 const Main = () => {
    return (
       <Box component='main' sx={{
-         p: 2,
          width: '100%',
-         bgcolor: 'background.default',
+         height: '100%',
+         boxSizing: 'border-box'
       }}>
          <Toolbar />
-         <Grid container rowSpacing={2} columnSpacing={2} alignItems="stretch" direction="row">
+         <Grid
+            container
+            rowSpacing={2}
+            columnSpacing={2}
+            alignItems="stretch"
+            direction={{ xs: 'column', md: 'row' }}>
             <Grid item xs={6}>
                <InputController />
             </Grid>
