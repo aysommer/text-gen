@@ -1,3 +1,3 @@
 # text-gen
 
-Text generator via template.
+[Demo](https://aysommer.github.io/text-gen/)
